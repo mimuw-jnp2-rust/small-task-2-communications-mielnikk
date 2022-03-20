@@ -83,7 +83,7 @@ impl Client {
     // Method should return an error when a connection already exists.
     // The client should send a handshake to the server.
     fn open(&mut self, addr: &str, server: Server) -> CommsResult<()> {
-        match self.connections.get_mut(addr) {
+        match self.connections.get(addr) {
             Some(Open(_)) => Err(ConnectionExists(addr.to_string())),
             None | Some(Closed) => {
                 let mut s = server;
